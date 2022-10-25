@@ -1,58 +1,31 @@
 import React from "react";
+import Header from "./components/header";
+import FeedbackList from './components/FeedbackList'
+import FeedbackStates from './components/FeedbackStates'
+import FeedbackData from "./Data/FeedbackData";
+import { useState } from 'react'
+import Cards from "./components/shared/Cards";
+// import PropTypes from 'prop-types'
 
-const title = "blog post";
-const body = "this is my blog post";
-const comments = [
-  { id: 1, text: "comment one" },
-  { id: 2, text: "comment two" },
-  { id: 3, text: "comment three" },
-];
-
-const showComments = true;
-const loding = false;
 function App() {
-  // return React.createElement('div',
-  // {className:'container'},
-  //     React.createElement('h1',{},'My app'))
-  // if(!loding){
-    const comments_box=(<div className="comments">
-    <h3> comments ({comments.length})</h3>
-    <ul>
-      {comments.map((comments, index) => (
-        <li key={index}>{comments.text}</li>
-      ))}
-    </ul>
-  </div>)
-
-
-
+  const [feedback,setFeedback]=useState(FeedbackData)
+  const deleteFeedback=(id)=>{
+    setFeedback(feedback.filter((item)=>(item.id)!==id))
+  }
   return (
-    <div className="container">
-      <h1>{title.toUpperCase()}</h1>
-      <p>{body}</p>
-
-      {showComments && comments_box}
+    <div>
+      {/* <Header text="Hello World" /> */}
+      {/* <Header text={true}/>   will not work */}
+      <Header text={'hello ji!!'} bgColor='red' textColor='blue' />
+      <div className="container">
+        {/* <h1>My App</h1> */}
+        <FeedbackStates feedback={feedback}/>
+        <FeedbackList Feedback={feedback} handleDelete={deleteFeedback}/>
+      </div>
     </div>
   );
 }
 
-// return(
-// <div className="container">
-//      <h1>{title.toUpperCase()}</h1>
-//         <p>{body}</p>
 
-//     <div className="comments">
-//         <h3> comments ({comments.length})</h3>
-//         <ul>{
-//                 comments.map((comments,index)=>(
-//                     <li key={index}>{comments.text}</li>
-//                 ))
-//             }
-//         </ul>
-//     </div>
-//  </div>
-// )}
-
-// }
 
 export default App;
