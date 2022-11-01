@@ -34,7 +34,7 @@ function FeedbackForm() {
                 updateFeedback(feedbackEdit.item.id,newFeedback)
             }
             else{
-            addFeedback(newFeedback);
+            addFeedback( newFeedback);
             }setText(' ')
         }
     }
