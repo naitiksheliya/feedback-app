@@ -2,10 +2,13 @@ import React from 'react'
 import {FaTimes} from 'react-icons/fa'
 import Cards from './shared/Cards'
 import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import FeedbackContext from '../context/FeedbackContext'
 // import { useState } from 'react'
 
 
-function Feedbackitem({item,handleDelete}) {
+function Feedbackitem({item}) {
+  const {deleteFeedback}=useContext(FeedbackContext)
     // const [rating,setRating]=useState(7);
     // const [text,setText]=useState('This is an amzing app');
     // const handleClick=()=>{
@@ -27,7 +30,7 @@ function Feedbackitem({item,handleDelete}) {
     <Cards reverse={true}>
       <div>
         <div className='num-display'>{item.rating}</div>
-        <button onClick={()=> handleDelete(item.id)} className="colse">
+        <button onClick={()=> deleteFeedback(item.id)} className="colse">
           <FaTimes color='purple'/>
         </button></div>
         <div className='text-display'>{item.text}</div>

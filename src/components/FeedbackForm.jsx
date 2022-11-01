@@ -4,9 +4,13 @@ import {useState} from 'react'
 import Cards from './shared/Cards'
 import RatingSelect from './RatingSelect'
 import Buttons from './Buttons'
+import { useContext } from 'react'
+import FeedbackContext from '../context/FeedbackContext'
 // import { setFlagsFromString } from 'v8'
 
-function FeedbackForm({handleAdd}) {
+function FeedbackForm() {
+    // const {handleAdd} =useContext(FeedbackContext)
+    const {addFeedback} =useContext(FeedbackContext)
     const [text,setText] = useState('')
     const [btnDisabled,setbtnDisabled] = useState(true)
     const [message,setMessage] = useState('')
@@ -18,7 +22,7 @@ function FeedbackForm({handleAdd}) {
                 text,
                 rating,
             }
-            handleAdd(newFeedback);
+            addFeedback(newFeedback);
             setText(' ')
         }
     }
