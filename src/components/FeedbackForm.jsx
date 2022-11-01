@@ -6,15 +6,23 @@ import RatingSelect from './RatingSelect'
 import Buttons from './Buttons'
 import { useContext } from 'react'
 import FeedbackContext from '../context/FeedbackContext'
+import { useEffect } from 'react'
 // import { setFlagsFromString } from 'v8'
 
 function FeedbackForm() {
     // const {handleAdd} =useContext(FeedbackContext)
-    const {addFeedback} =useContext(FeedbackContext)
     const [text,setText] = useState('')
     const [btnDisabled,setbtnDisabled] = useState(true)
     const [message,setMessage] = useState('')
     const [rating,setRating] = useState(10)
+    const {addFeedback ,feedbackEdit,updateFeedback} =useContext(FeedbackContext)
+    useEffect(()=>{
+        if(feedbackEdit.edit===true){
+            setbtnDisabled(false)
+            setText(feedbackEdit.item.text)
+            setRating(feedbackEdit.item.rating)
+        }
+    },[feedbackEdit])
     const handleSubmit=(e)=>{
         e.preventDefault()
         if(text.trim().length>=10){
@@ -22,8 +30,12 @@ function FeedbackForm() {
                 text,
                 rating,
             }
+            if(feedbackEdit.edit===true){
+                updateFeedback(feedbackEdit.item.id,newFeedback)
+            }
+            else{
             addFeedback(newFeedback);
-            setText(' ')
+            }setText(' ')
         }
     }
     const handleTextchange=(e)=>{

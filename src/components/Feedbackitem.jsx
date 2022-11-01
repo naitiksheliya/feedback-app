@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaTimes} from 'react-icons/fa'
+import {FaTimes ,FaEdit} from 'react-icons/fa'
 import Cards from './shared/Cards'
 import PropTypes from 'prop-types'
 import { useContext } from 'react'
@@ -8,7 +8,7 @@ import FeedbackContext from '../context/FeedbackContext'
 
 
 function Feedbackitem({item}) {
-  const {deleteFeedback}=useContext(FeedbackContext)
+  const {deleteFeedback,editFeedback}=useContext(FeedbackContext)
     // const [rating,setRating]=useState(7);
     // const [text,setText]=useState('This is an amzing app');
     // const handleClick=()=>{
@@ -28,11 +28,13 @@ function Feedbackitem({item}) {
     // <div className='card'>
     // <Cards reverse={true}>
     <Cards reverse={true}>
-      <div>
+     <div>
         <div className='num-display'>{item.rating}</div>
-        <button onClick={()=> deleteFeedback(item.id)} className="colse">
+        <button onClick={()=> deleteFeedback(item.id)} className="close">
           <FaTimes color='purple'/>
-        </button></div>
+        </button>
+        <button onClick={()=> editFeedback(item)} className="edit">
+          <FaEdit color='purple'></FaEdit></button></div>
         <div className='text-display'>{item.text}</div>
       {/* <button onClick={handleClick}>click</button> */}
    </Cards>
